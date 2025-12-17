@@ -1,15 +1,6 @@
-# algorithm1.py
-# Naive Approach: Minimum Spanning Tree using DFS for Cycle Detection
-import sys
 
-# زيادة حد التكرار لتجنب الخطأ مع الشبكات الكبيرة
-sys.setrecursionlimit(20000)
 
 def has_path_dfs(adj, current, target, visited):
-    """
-    دالة DFS للتأكد من وجود مسار بين نقطتين.
-    ترجع True إذا وجد مسار (يعني إضافة الكابل ستصنع دائرة).
-    """
     if current == target:
         return True
     visited.add(current)
@@ -20,12 +11,6 @@ def has_path_dfs(adj, current, target, visited):
     return False
 
 def run_naive_mst(num_buildings, all_edges):
-    """
-    تنفيذ الخوارزمية الساذجة.
-    Input: عدد المباني، قائمة بكل الكابلات الممكنة (u, v, weight)
-    Output: الكابلات المختارة، التكلفة الكلية
-    """
-    # 1. ترتيب الكابلات تصاعدياً حسب الوزن
     sorted_edges = sorted(all_edges, key=lambda x: x[2])
     
     mst_edges = []
@@ -37,7 +22,6 @@ def run_naive_mst(num_buildings, all_edges):
         if count == num_buildings - 1:
             break
         
-        # 2. التحقق الساذج (Naive Check) باستخدام DFS
         visited = set()
         if not has_path_dfs(adj, u, v, visited):
             mst_edges.append((u, v, w))
